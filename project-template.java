@@ -1,7 +1,6 @@
 //in progress creating template for the project (movie dataset reading, masking, KNN for K=1)
 import java.io.*;
-import java.util.SplittableRandom; 
-
+import java.lang.Math;
 public class Tests {
 
 	// Use we use 'static' for all methods to keep things simple, so we can call those methods main
@@ -15,7 +14,7 @@ public class Tests {
 	}
 
 	// Copy your vector operations here:
-static double [] mult(double a, double [] V) { // multiplying scalar and vector
+    static double [] mult(double a, double [] V) { // multiplying scalar and vector
     	// add your code
     	double [] result = new double [V.length];
         for(int i = 0; i < V.length; i++)
@@ -69,20 +68,12 @@ static double [] mult(double a, double [] V) { // multiplying scalar and vector
     	return result;    
     	
     }
-    	
-
-	
-	// I believe this should appear the same for everyone? - Kyle
-
-
-static int NumberOfFeatures = ; 
+static int NumberOfFeatures = 7;
 static double[] toFeatureVector(double id, String genre, double runtime, double year, double imdb, double rt, double budget, double boxOffice) {
 	
 	
    double[] feature = new double[NumberOfFeatures]; 
    feature[0] = id;  // We use the movie id as a numeric attribute.
-   feature[2] = imdb;
-   feature[3] = rt;
   
    switch (genre) { // We also use represent each movie genre as an integer number:
 
@@ -106,7 +97,7 @@ static double[] toFeatureVector(double id, String genre, double runtime, double 
 static double similarity(double[] u, double[] v) {
   return dot(u, v);  
 }
-
+	
 // We have implemented KNN classifier for the K=1 case only. You are welcome to modify it to support any K
 static int knnClassify(double[][] trainingData, int[] trainingLabels, double[] testFeature) {
     int k_value = (int) Math.sqrt(trainingData.length); //set K as as square root
