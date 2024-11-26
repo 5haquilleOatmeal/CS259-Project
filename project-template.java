@@ -185,20 +185,19 @@ public static void main(String[] args) {
    int[] testingLabels = new int[100]; 
    try {
        // You may need to change the path:        	        	
-       loadData("C:\\H\\strath\\259\\labs\\training-set.csv", trainingData, trainingLabels);            
-       loadData("C:\\H\\strath\\259\\labs\\testing-set.csv", testingData, testingLabels);            
+       loadData("C:\\Users\\hsb23125\\OneDrive - University of Strathclyde\\Documents\\CS259\\training-set.csv", trainingData, trainingLabels);
+       loadData("C:\\Users\\hsb23125\\OneDrive - University of Strathclyde\\Documents\\CS259\\testing-set.csv", testingData, testingLabels);
    } 
    catch (IOException e) {
        System.out.println("Error reading data files: " + e.getMessage());
        return;
    }
 
- // Compute accuracy on the testing set
+   // Compute accuracy on the testing set
    int correctPredictions = 0;
 
-    for (int i = 0; i < trainingData.length; i++){
+    for (int i = 0; i < testingData.length; i++){
         int prediction = knnClassify(trainingData, trainingLabels, testingData[i]);
-
         if (prediction == testingLabels[i]){
             correctPredictions++;
         }
@@ -209,9 +208,5 @@ public static void main(String[] args) {
    System.out.printf("A: %.2f%%\n", accuracy);
 
 }
-
-}
-
-
 
 
