@@ -15,7 +15,7 @@ public class Tests {
 	}
 
 	// Copy your vector operations here:
-	// ...
+	// I believe this should appear the same for everyone? - Kyle
 
 
 static int NumberOfFeatures = ; 
