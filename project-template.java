@@ -81,6 +81,8 @@ static double[] toFeatureVector(double id, String genre, double runtime, double 
 	
    double[] feature = new double[NumberOfFeatures]; 
    feature[0] = id;  // We use the movie id as a numeric attribute.
+   feature[2] = imdb;
+   feature[3] = rt;
   
    switch (genre) { // We also use represent each movie genre as an integer number:
 
