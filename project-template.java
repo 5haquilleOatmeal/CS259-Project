@@ -198,6 +198,7 @@ public static void main(String[] args) {
    double accuracy = (double) correctPredictions / testingData.length * 100;
    System.out.printf("A: %.2f%%\n", accuracy);
 
+	}
 }
 
 
