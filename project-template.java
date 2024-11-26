@@ -15,6 +15,63 @@ public class Tests {
 	}
 
 	// Copy your vector operations here:
+static double [] mult(double a, double [] V) { // multiplying scalar and vector
+    	// add your code
+    	double [] result = new double [V.length];
+        for(int i = 0; i < V.length; i++)
+        	result[i] = a*V[i];
+        return result;
+    }
+    static double [] add(double a, double [] V) { // adding scalar and vector
+    	// add your code
+    	double [] result = new double [V.length];
+     
+        for(int i = 0; i < V.length; i++)
+        	result[i] = a + V[i];
+        return result;
+    	
+    }
+    static double [] sub(double a, double [] V) {  // subtracting a scalar from vector        	    
+    	// add your code
+    	double [] result = new double [V.length];
+        
+        for(int i = 0; i < V.length; i++)
+        	result[i] = V[i] - a;
+    	    	
+        return result;    	    
+    	
+    }
+
+        
+    static double [] add(double [] U, double [] V) { // adding two vectors
+    	// add your code
+    	Assert(U.length == V.length);
+    	double [] result = new double [U.length];
+    
+        for(int i = 0; i < U.length; i++)
+        	result[i] = U[i] + V[i];
+    	    	
+        return result;    	    
+    	
+    }
+    static double [] sub(double [] U, double [] V) { // subtracting vector from vector 
+    	// add your code
+    	return add(U, mult(-1, V));
+    	
+    }
+    static double dot(double [] U, double [] V) { // dot product of two vectors 
+    	// add your code
+    	Assert(U.length == V.length);
+    	double result = 0;     
+        for(int i = 0; i < U.length; i++)
+        	result += U[i]*V[i];
+    	    	   	
+    	return result;    
+    	
+    }
+    	
+
+	
 	// I believe this should appear the same for everyone? - Kyle
 
 
@@ -134,14 +191,21 @@ public static void main(String[] args) {
        return;
    }
 
-   // Compute accuracy on the testing set
+ // Compute accuracy on the testing set
    int correctPredictions = 0;
 
-   // Add some lines here: ...
-   
+    for (int i = 0; i < trainingData.length; i++){
+        int prediction = knnClassify(trainingData, trainingLabels, testingData[i]);
+
+        if (prediction == testingLabels[i]){
+            correctPredictions++;
+        }
+    }
+
+
    double accuracy = (double) correctPredictions / testingData.length * 100;
    System.out.printf("A: %.2f%%\n", accuracy);
-   
+
 }
 
 }
