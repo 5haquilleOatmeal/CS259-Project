@@ -50,18 +50,47 @@ static double similarity(double[] u, double[] v) {
 
 // We have implemented KNN classifier for the K=1 case only. You are welcome to modify it to support any K
 static int knnClassify(double[][] trainingData, int[] trainingLabels, double[] testFeature) {
-
-	 int bestMatch = -1;
-   double bestSimilarity = - Double.MAX_VALUE;  // We start with the worst similarity that we can get in Java.
+    int k_value = (int) Math.sqrt(trainingData.length); //set K as as square root
+    double[]similarities = new double[trainingData.length]; // to store the similiarity for each training example
+    int[] labels = new int[trainingData.length]; //storing corresponding labels
+    int bestMatch = -1;
+   double bestSimilarity = - Double.MAX_VALUE;
 
    for (int i = 0; i < trainingData.length; i++) {
-       double currentSimilarity = similarity(testFeature, trainingData[i]);
-       if (currentSimilarity > bestSimilarity) { 
-      	 
-      	Assert(false); // This needs to be replaced by some lines.
-       }
+       similarities[i] = similarity(testFeature, trainingData[i]);
+       labels[i] = trainingLabels[i];
    }
-   return trainingLabels[bestMatch];
+  for (int i = 0; i < trainingData.length; i++) {
+      for (int j = i + 1; j < trainingData.length; j++) {
+          if (similarities[i] < similarities[j]) {
+              double tempsimularity = similarities[i];
+              int templabel = labels[i];
+              //sort the data by K's closest neighbours by swapping them around
+              similarities[i] = similarities[j];
+              similarities[j] = tempsimularity;
+              //swap corresponding labels too
+              labels[i] = labels[j];
+              labels[j] = templabel;
+
+          }
+      }
+  }
+      //use majority voting to determine the class of K's nearest neighbours
+      int[] count = new int[100];
+      for (int i = 0; i < k_value; i++){
+          count[labels[i]]++;
+      }
+    //find label with the maximum count
+      int maxCount = 0;
+      for(int i = 0; i < count.length; i++){
+        if (count[i] > maxCount){
+             maxCount = count[i];
+             bestMatch = i;
+        }
+
+    }
+
+   return bestMatch;
 }
 
 
